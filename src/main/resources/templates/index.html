@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <title>Coin Market</title>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <script src="static/controller.js"></script>
+
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
+    <link href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css"
+          rel="stylesheet"/>
+    <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /-->
+
+    <script type="text/javascript">
+        var app = angular.module('app', ["ngTable"]);
+        app.controller('getcontroller', function ($scope, $http, $location) {
+            var url = "http://localhost:8080/";
+            $http.get(url).then(function (response) {
+                $scope.response = response
+            }, function error(response) {
+                $scope.postResultMessage = "Error with status: " +
+                    response.statusText;
+            });
+        });
+    </script>
+</head>
+<body>
+
+
+<div class="container" ng-app="app">
+    <div class="col-sm-offset-2 col-sm-10" ng-controller="getcontroller">
+        <table align="center" class="table" ng-table="vm.tableParams">
+            <tr ng-repeat="coin in response">
+                <td sortable="'name'" title="'Name'">
+                    <li ng-repeat="(key, value) in coin">{{value.name}}</li>
+                </td>
+                <td sortable="'price_usd'" title="'Price'">
+                    <li ng-repeat="(key, value) in coin">{{value.price_usd}}</li>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
+
