@@ -1,7 +1,8 @@
 package com.hendisantika.coinmarketcaprestapiconsumer.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,7 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class HomeController {
-    @GetMapping("/home")
+    //    @GetMapping("/home")
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String getHomePage() {
         return "index";
     }
